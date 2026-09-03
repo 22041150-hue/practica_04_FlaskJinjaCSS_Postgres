@@ -61,17 +61,22 @@ def listar_alumnos():
         alumnos=alumnos
     )
 
-@app.route("/debug")
-def debug():
+@app.route("/crear_tabla")
+def crear_tabla():
     conexion = conectar()
     cursor = conexion.cursor()
-    cursor.execute("SELECT current_database(), current_user, current_schema();")
-    resultado = cursor.fetchone()
-    cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
-    tablas = cursor.fetchall()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS alumnos (
+            id SERIAL PRIMARY KEY,
+            nombre VARCHAR(100) NOT NULL,
+            pasatiempos VARCHAR(255),
+            me_gusta VARCHAR(255)
+        )
+    """)
+    conexion.commit()
     cursor.close()
     conexion.close()
-    return f"Base de datos: {resultado[0]}, Usuario: {resultado[1]}, Esquema: {resultado[2]}, Tablas: {tablas}"
+    return "Tabla creada correctamente"
 
 if __name__ == "__main__":
     app.run(debug=True)
