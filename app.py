@@ -61,5 +61,15 @@ def listar_alumnos():
         alumnos=alumnos
     )
 
+@app.route("/debug")
+def debug():
+    conexion = conectar()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT current_database(), current_user, current_schema();")
+    resultado = cursor.fetchone()
+    cursor.close()
+    conexion.close()
+    return f"Base de datos: {resultado[0]}, Usuario: {resultado[1]}, Esquema: {resultado[2]}"
+
 if __name__ == "__main__":
     app.run(debug=True)
