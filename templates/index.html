@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 04 - PostgreSQL</title>
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+<div class="contenedor">
+    <h1>Registro de alumnos (PostgreSQL)</h1>
+    <form action="/saludar" method="POST">
+        <label>Nombre:</label>
+        <input type="text"
+            name="nombre" required>
+
+        <h3>Pasatiempos</h3>
+        <label>
+            <input type="checkbox" name="pasatiempos" value="Fútbol">
+            Fútbol
+        </label>
+        <label>
+            <input type="checkbox" name="pasatiempos" value="Lectura">
+            Lectura
+        </label>
+        <label>
+            <input type="checkbox" name="pasatiempos" value="Cine">
+            Cine
+        </label>
+        <label>
+            <input type="checkbox" name="pasatiempos" value="Música">
+            Música
+        </label>
+
+        <h3>¿Qué me gusta hacer?</h3>
+        <textarea name="me_gusta"
+            maxlength="30"
+            required></textarea>
+
+        <br><br>
+        <button type="submit">
+            Registrar
+        </button>
+    </form>
+
+    <p>
+        <a href="/alumnos">
+            Ver alumnos registrados
+        </a>
+    </p>
+</div>
+</body>
+</html>
