@@ -67,9 +67,11 @@ def debug():
     cursor = conexion.cursor()
     cursor.execute("SELECT current_database(), current_user, current_schema();")
     resultado = cursor.fetchone()
+    cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
+    tablas = cursor.fetchall()
     cursor.close()
     conexion.close()
-    return f"Base de datos: {resultado[0]}, Usuario: {resultado[1]}, Esquema: {resultado[2]}"
+    return f"Base de datos: {resultado[0]}, Usuario: {resultado[1]}, Esquema: {resultado[2]}, Tablas: {tablas}"
 
 if __name__ == "__main__":
     app.run(debug=True)
