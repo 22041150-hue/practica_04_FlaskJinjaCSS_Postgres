@@ -61,22 +61,5 @@ def listar_alumnos():
         alumnos=alumnos
     )
 
-@app.route("/crear_tabla")
-def crear_tabla():
-    conexion = conectar()
-    cursor = conexion.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS alumnos (
-            id SERIAL PRIMARY KEY,
-            nombre VARCHAR(100) NOT NULL,
-            pasatiempos VARCHAR(255),
-            me_gusta VARCHAR(255)
-        )
-    """)
-    conexion.commit()
-    cursor.close()
-    conexion.close()
-    return "Tabla creada correctamente"
-
 if __name__ == "__main__":
     app.run(debug=True)
